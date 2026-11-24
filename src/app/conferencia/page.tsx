@@ -12,7 +12,7 @@ export default async function ConferenciaPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h2 className="text-xl font-bold">Conferência de patrimônio</h2>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-zinc-500">
           Confira item a item seguindo o padrão do Relatório de Bens Imobilizado: Código, Descrição,
           Dependência e Status. Marque se confere, está divergente ou não foi localizado.
         </p>

@@ -12,7 +12,7 @@ export default async function TransferenciaPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h2 className="text-xl font-bold">Transferência de estoque</h2>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-zinc-500">
           Mova um item de uma casa de oração para outra que esteja precisando.
         </p>
       </div>

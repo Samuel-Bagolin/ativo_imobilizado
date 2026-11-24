@@ -21,26 +21,26 @@ export default async function PainelPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h2 className="text-xl font-bold">Visão geral — São José dos Pinhais</h2>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-zinc-500">
           Resumo do patrimônio registrado em todas as casas de oração da Administração.
         </p>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="card">
-          <p className="text-xs text-slate-500 font-semibold uppercase">Casas de oração</p>
+          <p className="text-xs text-zinc-500 font-semibold uppercase">Casas de oração</p>
           <p className="text-2xl font-bold mt-1">{resumo.length}</p>
         </div>
         <div className="card">
-          <p className="text-xs text-slate-500 font-semibold uppercase">Com estoque (verde)</p>
+          <p className="text-xs text-zinc-500 font-semibold uppercase">Com estoque (verde)</p>
           <p className="text-2xl font-bold mt-1 text-green-700">{casasComEstoque}</p>
         </div>
         <div className="card">
-          <p className="text-xs text-slate-500 font-semibold uppercase">Sem estoque (vermelho)</p>
+          <p className="text-xs text-zinc-500 font-semibold uppercase">Sem estoque (vermelho)</p>
           <p className="text-2xl font-bold mt-1 text-red-700">{casasSemEstoque}</p>
         </div>
         <div className="card">
-          <p className="text-xs text-slate-500 font-semibold uppercase">Valor atual total</p>
+          <p className="text-xs text-zinc-500 font-semibold uppercase">Valor atual total</p>
           <p className="text-2xl font-bold mt-1">
             {valorTotalAtivo.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
           </p>
@@ -67,7 +67,7 @@ export default async function PainelPage() {
         <div className="card">
           <h3 className="font-bold mb-2">Casas sem estoque ativo</h3>
           {casasSemEstoque === 0 ? (
-            <p className="text-sm text-slate-500">Todas as casas possuem ao menos um item ativo.</p>
+            <p className="text-sm text-zinc-500">Todas as casas possuem ao menos um item ativo.</p>
           ) : (
             <ul className="flex flex-col gap-2">
               {resumo

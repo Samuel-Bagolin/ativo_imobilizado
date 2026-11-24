@@ -12,7 +12,7 @@ export default async function LancamentoPage() {
     <div className="flex flex-col gap-6">
       <div>
         <h2 className="text-xl font-bold">Lançamento de patrimônio</h2>
-        <p className="text-sm text-slate-500">
+        <p className="text-sm text-zinc-500">
           Registre os itens (bens imobilizados) existentes em cada casa de oração.
         </p>
       </div>

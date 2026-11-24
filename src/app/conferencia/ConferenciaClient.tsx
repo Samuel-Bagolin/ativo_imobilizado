@@ -87,7 +87,7 @@ export default function ConferenciaClient({
             placeholder="Nome do responsável"
           />
         </div>
-        <div className="text-sm text-slate-500">
+        <div className="text-sm text-zinc-500">
           {totalConferidos} de {itensDaCasa.length} itens conferidos nesta visita
         </div>
       </div>
@@ -115,7 +115,7 @@ export default function ConferenciaClient({
                   <td>{item.dependencia}</td>
                   <td>{item.vlAtual.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</td>
                   <td>{item.status}</td>
-                  <td>{ultima ? resultadoBadge(ultima.resultado) : <span className="text-slate-400">—</span>}</td>
+                  <td>{ultima ? resultadoBadge(ultima.resultado) : <span className="text-zinc-400">—</span>}</td>
                   <td>
                     <div className="flex gap-1 flex-wrap">
                       <button
@@ -146,7 +146,7 @@ export default function ConferenciaClient({
             })}
             {itensDaCasa.length === 0 && (
               <tr>
-                <td colSpan={7} className="text-center text-slate-400 py-6">
+                <td colSpan={7} className="text-center text-zinc-400 py-6">
                   Nenhum item lançado para esta casa. Use o módulo de Lançamento primeiro.
                 </td>
               </tr>

@@ -117,7 +117,7 @@ export default function TransferenciaClient({
               ))}
             </select>
             {itensDaOrigem.length === 0 && (
-              <p className="text-xs text-slate-400 mt-1">Esta casa não tem itens disponíveis para transferir.</p>
+              <p className="text-xs text-zinc-400 mt-1">Esta casa não tem itens disponíveis para transferir.</p>
             )}
           </div>
 
@@ -208,7 +208,7 @@ export default function TransferenciaClient({
                 ))}
               {transferenciasIniciais.length === 0 && (
                 <tr>
-                  <td colSpan={6} className="text-center text-slate-400 py-6">
+                  <td colSpan={6} className="text-center text-zinc-400 py-6">
                     Nenhuma transferência registrada ainda.
                   </td>
                 </tr>

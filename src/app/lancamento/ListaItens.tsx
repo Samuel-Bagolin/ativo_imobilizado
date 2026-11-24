@@ -63,7 +63,7 @@ export default function ListaItens({
             ))}
             {itensFiltrados.length === 0 && (
               <tr>
-                <td colSpan={6} className="text-center text-slate-400 py-6">
+                <td colSpan={6} className="text-center text-zinc-400 py-6">
                   Nenhum item lançado ainda.
                 </td>
               </tr>
