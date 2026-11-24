@@ -1,69 +1,89 @@
-import Image from "next/image";
+import Link from "next/link";
+import { resumoEstoquePorCasa, listarItens, listarTransferencias } from "@/lib/db";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function PainelPage() {
+  const resumo = resumoEstoquePorCasa();
+  const itens = listarItens();
+  const transferencias = listarTransferencias();
+
+  const casasComEstoque = resumo.filter((r) => r.itensAtivos > 0).length;
+  const casasSemEstoque = resumo.length - casasComEstoque;
+  const valorTotalAtivo = itens
+    .filter((i) => i.status === "Ativo")
+    .reduce((acc, i) => acc + i.vlAtual, 0);
+  const transferenciasAbertas = transferencias.filter(
+    (t) => t.status === "Solicitada" || t.status === "Em trânsito"
+  ).length;
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="flex flex-col gap-6">
+      <div>
+        <h2 className="text-xl font-bold">Visão geral — São José dos Pinhais</h2>
+        <p className="text-sm text-slate-500">
+          Resumo do patrimônio registrado em todas as casas de oração da Administração.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="card">
+          <p className="text-xs text-slate-500 font-semibold uppercase">Casas de oração</p>
+          <p className="text-2xl font-bold mt-1">{resumo.length}</p>
+        </div>
+        <div className="card">
+          <p className="text-xs text-slate-500 font-semibold uppercase">Com estoque (verde)</p>
+          <p className="text-2xl font-bold mt-1 text-green-700">{casasComEstoque}</p>
+        </div>
+        <div className="card">
+          <p className="text-xs text-slate-500 font-semibold uppercase">Sem estoque (vermelho)</p>
+          <p className="text-2xl font-bold mt-1 text-red-700">{casasSemEstoque}</p>
+        </div>
+        <div className="card">
+          <p className="text-xs text-slate-500 font-semibold uppercase">Valor atual total</p>
+          <p className="text-2xl font-bold mt-1">
+            {valorTotalAtivo.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="card flex flex-col gap-3">
+          <h3 className="font-bold">Módulos</h3>
+          <Link href="/lancamento" className="btn btn-outline justify-start">
+            📋 Lançamento — cadastrar itens por casa de oração
+          </Link>
+          <Link href="/conferencia" className="btn btn-outline justify-start">
+            ✅ Conferência — auditar itens do Relatório de Bens
+          </Link>
+          <Link href="/mapa" className="btn btn-outline justify-start">
+            🗺️ Mapa 3D — estoque geográfico verde/vermelho
+          </Link>
+          <Link href="/transferencia" className="btn btn-outline justify-start">
+            🔄 Transferência — mover itens entre casas
+          </Link>
         </div>
-      </main>
+
+        <div className="card">
+          <h3 className="font-bold mb-2">Casas sem estoque ativo</h3>
+          {casasSemEstoque === 0 ? (
+            <p className="text-sm text-slate-500">Todas as casas possuem ao menos um item ativo.</p>
+          ) : (
+            <ul className="flex flex-col gap-2">
+              {resumo
+                .filter((r) => r.itensAtivos === 0)
+                .map((r) => (
+                  <li key={r.casa.id} className="flex items-center justify-between text-sm">
+                    <span>{r.casa.nome}</span>
+                    <span className="badge badge-red">sem itens ativos</span>
+                  </li>
+                ))}
+            </ul>
+          )}
+          <h3 className="font-bold mt-4 mb-2">Transferências em aberto</h3>
+          <p className="text-2xl font-bold">{transferenciasAbertas}</p>
+        </div>
+      </div>
     </div>
   );
 }

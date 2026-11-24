@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# dados locais (gerados automaticamente na primeira execução — ver src/lib/db.ts)
+/data/db.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
